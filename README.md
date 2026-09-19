@@ -1,14 +1,8 @@
-# FS Custom Prints — WooCommerce Product Content
+# FS Custom Prints — WooCommerce SEO Content Repository
 
-This repository contains the organized product and service content structure for **FS Custom Prints**.
+This repository contains ready-to-paste WooCommerce content for FS Custom Prints.
 
-## Primary Market
-Lahore, Pakistan
-
-## Website
-fscustomprints.com
-
-## Main Product Categories
+## Main Categories
 
 - Uniforms
 - Custom Apparel
@@ -16,31 +10,55 @@ fscustomprints.com
 - Printing
 - Corporate Merchandise
 
-## Content Standard
+## Product Content Included
 
-Every product folder contains its own README.md with instructions for creating a complete WooCommerce product listing.
+Every product folder contains a `README.md` with:
 
-Product content should follow current Google SEO best practices while remaining useful, natural and customer-focused.
+- Product Name / H1
+- Product Description
+- Product Short Description
+- Focus Keyword
+- Rank Math SEO Title
+- Meta Description
+- URL Slug
+- Image Alt Text
+- Image Title
+- Image Caption
+- Image Description
+- SEO Image Filename
+- WoodMart Image Optimizer settings
+- WooCommerce category information
 
-Do not invent prices, MOQ, delivery times, materials, specifications, printing methods, sizes, production capacity, guarantees or other unverified information.
+## Products
 
-## Standard Product Output
+- **Uniforms** → Corporate Uniform
+- **Uniforms** → Factory & Industrial Uniform
+- **Uniforms** → Hospital & Medical Uniform
+- **Uniforms** → Restaurant & Cafe Uniform
+- **Uniforms** → School Uniform
+- **Uniforms** → Security Uniform
+- **Custom Apparel** → Custom Caps
+- **Custom Apparel** → Custom Hoodies
+- **Custom Apparel** → Custom Jackets
+- **Custom Apparel** → Custom Polo Shirts
+- **Custom Apparel** → Custom Sweatshirts
+- **Custom Apparel** → Custom T-Shirts
+- **Embroidery** → Cap Embroidery
+- **Embroidery** → Embroidered Patches
+- **Embroidery** → Logo Embroidery
+- **Embroidery** → Uniform Embroidery
+- **Printing** → DTF Printing
+- **Printing** → Heat Transfer Printing
+- **Printing** → Screen Printing
+- **Printing** → Sublimation Printing
+- **Corporate Merchandise** → Corporate Gift Sets
+- **Corporate Merchandise** → Custom Keychains
+- **Corporate Merchandise** → Custom Mugs
+- **Corporate Merchandise** → Water Bottles
 
-1. Product Name / H1
-2. Product Description
-3. Product Short Description
-4. Focus Keyword
-5. Rank Math SEO Title
-6. Meta Description
-7. URL Slug
-8. Image Alt Text
-9. Image Title
-10. Image Caption
-11. Image Description
-12. Image Filename
-13. WoodMart Image Optimizer Settings
-14. Recommended Product Category
+## Publishing Rule
 
----
-FS Custom Prints
-Lahore, Pakistan
+Review the product-specific details before publishing. Do not add unverified materials, MOQ, prices, delivery times, specifications or production claims.
+
+**Website:** fscustomprints.com  
+**Market:** Lahore, Pakistan
