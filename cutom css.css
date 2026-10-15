@@ -1,0 +1,294 @@
+
+/* ==========================================================================
+   FS CUSTOM PRINTS – GLOBAL BUTTON STYLE (ALL BUTTONS)
+   --------------------------------------------------------------------------
+   Theme:        WoodMart (Elementor + WooCommerce)
+   Purpose:      Crimson-to-black gradient on every button, site-wide
+   Default:      linear-gradient(135deg, #A8112F 0%, #1A0508 100%)
+   Hover:        linear-gradient(270deg, #A8112F 0%, #1A0508 100%)
+                 (only the angle changes: 135deg -> 270deg)
+   Colors:       Start (crimson): #A8112F  rgb(168, 17, 47)
+                 End   (black):   #1A0508  rgb(26, 5, 8)
+   Text / icons: White
+   Sections:     1. General buttons – default state
+                 2. General buttons – hover state
+                 3. Icons
+                 4. Cookie popup "Accept" button
+   Updated:      2026-10-14
+   Notes:        !important overrides WoodMart / Elementor / Woo styles.
+                 If a button is missed, add its class to BOTH the default
+                 and hover lists of its section.
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   1. GENERAL BUTTONS – DEFAULT STATE (135deg)
+   -------------------------------------------------------------------------- */
+.btn,
+.button,
+button.button,
+input[type="submit"],
+.elementor-button,
+.wd-button-wrapper .btn,
+.woocommerce a.button,
+.woocommerce button.button,
+.woocommerce input.button,
+.single_add_to_cart_button,
+.checkout-button,
+.wd-buttons .btn,
+.wd-load-more {
+  background-color: #A8112F !important;
+  background-image: linear-gradient(135deg, #A8112F 0%, #1A0508 100%) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   2. GENERAL BUTTONS – HOVER STATE (angle changes to 270deg)
+   -------------------------------------------------------------------------- */
+.btn:hover,
+.button:hover,
+button.button:hover,
+input[type="submit"]:hover,
+.elementor-button:hover,
+.wd-button-wrapper .btn:hover,
+.woocommerce a.button:hover,
+.woocommerce button.button:hover,
+.woocommerce input.button:hover,
+.single_add_to_cart_button:hover,
+.checkout-button:hover,
+.wd-buttons .btn:hover,
+.wd-load-more:hover {
+  background-image: linear-gradient(270deg, #A8112F 0%, #1A0508 100%) !important;
+  color: #fff !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   3. ICONS (keep white)
+   -------------------------------------------------------------------------- */
+.btn i,
+.btn .wd-icon,
+.elementor-button i {
+  color: #fff !important;
+}
+
+
+/* ==========================================================================
+   4. COOKIE POPUP – "ACCEPT" BUTTON
+   --------------------------------------------------------------------------
+   Location:     Bottom bar: "We use cookies to improve your experience..."
+   Style:        Same gradient as all other buttons (135deg -> 270deg hover)
+   Reason:       WoodMart styles this button with its own classes, so the
+                 general button rules above do not reach it
+   Note:         If it is still yellow, inspect the button and add its
+                 class to both lists below
+   ========================================================================== */
+
+/* 4a. Default state (135deg) */
+.wd-cookies-popup .cookies-accept-btn,
+.wd-cookies-popup .wd-cookies-buttons .btn,
+.wd-cookies-popup .wd-cookies-buttons a,
+.wd-cookies-popup a.btn,
+.wd-cookies-popup .wd-cookies-inner .btn {
+  background-color: #A8112F !important;
+  background-image: linear-gradient(135deg, #A8112F 0%, #1A0508 100%) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+}
+
+/* 4b. Hover state (270deg) */
+.wd-cookies-popup .cookies-accept-btn:hover,
+.wd-cookies-popup .wd-cookies-buttons .btn:hover,
+.wd-cookies-popup .wd-cookies-buttons a:hover,
+.wd-cookies-popup a.btn:hover,
+.wd-cookies-popup .wd-cookies-inner .btn:hover {
+  background-image: linear-gradient(270deg, #A8112F 0%, #1A0508 100%) !important;
+  color: #fff !important;
+}
+
+/* 4c. Cookie button icon (keep white) */
+.wd-cookies-popup .btn i {
+  color: #fff !important;
+}
+
+/* ============================ END BUTTON STYLE ============================ */
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   FS CUSTOM PRINTS – "GET A QUOTE" BAR THAT SHOWS "QUERY ABOUT {PRODUCT}"
+   --------------------------------------------------------------------------
+   Default: crimson-to-black gradient button (WhatsApp icon + "Get a Quote")
+   Hover:   button turns into a message bar: tag icon (decorative)
+            + "Query about {Product}" (read-only) + green send button
+   Colors:  Wine #A8112F, black #1A0508, WhatsApp green #25D366
+   Needs:   HTML form (class fs-quote) + small script, placed in an Elementor
+            HTML widget on the product page. Product name is read from
+            .product_title, or data-product="Name" on the form.
+   Updated: 2026-10-15
+   ========================================================================== */
+
+:root {
+  --fs-wine:  #A8112F;
+  --fs-black: #1A0508;
+  --fs-wa:    #25D366;
+  --fs-ease:  cubic-bezier(.22, 1, .36, 1);
+}
+
+
+/* --------------------------------------------------------------------------
+   1. BUTTON (default state)
+   -------------------------------------------------------------------------- */
+.fs-quote {
+  position: relative;
+  width: 260px;
+  height: 64px;
+  border-radius: 14px;
+  overflow: hidden;
+  color: #fff;
+  background-color: var(--fs-wine);
+  background-image: linear-gradient(135deg, #A8112F 0%, #1A0508 100%);
+  box-shadow: 0 6px 16px rgba(168, 17, 47, .25);
+  transition: width .55s var(--fs-ease), border-radius .55s var(--fs-ease), box-shadow .4s ease;
+}
+
+/* Light layer that fades in on hover */
+.fs-quote::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #f6f2ec;
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+
+
+/* --------------------------------------------------------------------------
+   2. HOVER / FOCUS (button turns into the message bar)
+   -------------------------------------------------------------------------- */
+.fs-quote:hover,
+.fs-quote:focus-within {
+  width: min(460px, calc(100vw - 32px));
+  border-radius: 999px;
+  box-shadow: 0 10px 26px rgba(168, 17, 47, .28);
+}
+.fs-quote:hover::before,
+.fs-quote:focus-within::before {
+  opacity: 1;
+}
+
+
+/* --------------------------------------------------------------------------
+   3. BUTTON FACE ("Get a Quote" text + WhatsApp icon)
+   -------------------------------------------------------------------------- */
+.fs-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font: 700 19px Arial, sans-serif;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity .25s ease, transform .45s var(--fs-ease);
+}
+.fs-quote:hover .fs-face,
+.fs-quote:focus-within .fs-face {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+.fs-ico { width: 1.25em; height: 1.25em; fill: #fff; }
+
+
+/* --------------------------------------------------------------------------
+   4. MESSAGE BAR (tag icon + product text + send button)
+   -------------------------------------------------------------------------- */
+.fs-bar {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 9px 0 22px;
+  opacity: 0;
+  transform: translateX(20px);
+  pointer-events: none;
+  transition: opacity .2s ease, transform .45s var(--fs-ease);
+}
+.fs-quote:hover .fs-bar,
+.fs-quote:focus-within .fs-bar {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  transition: opacity .35s ease .15s, transform .5s var(--fs-ease) .1s;
+}
+
+/* Decorative tag icon (not clickable) */
+.fs-tag { width: 22px; height: 22px; fill: var(--fs-wine); flex: none; }
+
+/* "Query about {product}" – read-only, placeholder look */
+.fs-bar input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  outline: none;
+  font-size: 17px;
+  color: #333;
+  text-overflow: ellipsis;
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+
+/* --------------------------------------------------------------------------
+   5. SEND BUTTON (WhatsApp green)
+   -------------------------------------------------------------------------- */
+.fs-send {
+  width: 48px;
+  height: 48px;
+  flex: none;
+  border: 0;
+  border-radius: 50%;
+  background: var(--fs-wa);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform .25s var(--fs-ease), filter .2s;
+}
+.fs-send:hover  { transform: scale(1.08); filter: brightness(1.06); }
+.fs-send:active { transform: scale(.94); }
+.fs-send:focus-visible { outline: 3px solid #E3B04B; outline-offset: 2px; }
+.fs-send svg { width: 22px; height: 22px; fill: #fff; margin-left: 2px; }
+
+
+/* --------------------------------------------------------------------------
+   6. ACCESSIBILITY
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .fs-quote, .fs-quote * { transition-duration: .01s !important; }
+}
+
+/* ============================ END QUOTE BAR STYLE ========================= */
+
+
+
+
+
+
+
+
+
+
+
+
