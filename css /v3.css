@@ -1,0 +1,80 @@
+/* ---------- 6. GET A QUOTE BUTTON (PRODUCT CARDS) ---------- */
+/* Needs the PHP snippet that outputs .fs-quote-btn */
+/* UPDATED: button turns into a WhatsApp message bar on hover
+   Default: 135deg gradient "Get a Quote"
+   Hover:   light pill + "Query about {product}" + green send circle
+   Text:    add data-product="{product}" to the link (see note below);
+            without it the bar shows "Chat on WhatsApp"                   */
+.fs-quote-wrap{
+  text-align:center;
+  margin-top:12px;
+}
+.fs-quote-btn{
+  position:relative;
+  display:block;
+  width:150px;
+  max-width:100%;
+  height:42px;
+  line-height:42px;
+  margin:0 auto;
+  padding:0 !important;
+  overflow:hidden;
+  white-space:nowrap;
+  text-align:center;
+  font-size:14px;
+  font-weight:600;
+  border-radius:999px;
+  border-color:transparent !important;
+  color:#FFFFFF !important;
+  background-color:#A8112F !important;
+  background-image:linear-gradient(135deg, #A8112F 0%, #1A0508 100%) !important;
+  transition:width .5s cubic-bezier(.22,1,.36,1), color .2s ease, box-shadow .3s ease;
+}
+
+/* Hover: widen to the full card width, hide the "Get a Quote" text */
+.fs-quote-btn:hover{
+  width:100%;
+  color:transparent !important;
+  box-shadow:0 6px 16px rgba(168, 17, 47, 0.35);
+}
+
+/* Message layer (light pill with text) */
+.fs-quote-btn::before{
+  content:"Chat on WhatsApp";
+  position:absolute;
+  inset:0;
+  padding:0 52px 0 18px;
+  background:#f6f2ec;
+  color:#333;
+  font-weight:500;
+  text-align:left;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  opacity:0;
+  transition:opacity .35s ease .1s;
+}
+.fs-quote-btn[data-product]::before{
+  content:"Query about " attr(data-product);
+}
+.fs-quote-btn:hover::before{
+  opacity:1;
+}
+
+/* Green send circle */
+.fs-quote-btn::after{
+  content:"";
+  position:absolute;
+  top:4px;
+  right:4px;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:#25D366 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fff'%3E%3Cpath d='M2.01 21 23 12 2.01 3 2 10l15 2-15 2z'/%3E%3C/svg%3E") 55% center / 17px no-repeat;
+  opacity:0;
+  transform:scale(.4);
+  transition:opacity .3s ease .15s, transform .45s cubic-bezier(.22,1,.36,1) .1s;
+}
+.fs-quote-btn:hover::after{
+  opacity:1;
+  transform:scale(1);
+}
