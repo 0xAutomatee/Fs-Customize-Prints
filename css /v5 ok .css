@@ -1,0 +1,745 @@
+/* ==========================================================================
+   Header banner (HTML block 26086) - 30px, full width, sticky, responsive
+   ========================================================================== */
+/* ==========================================================================
+   Header banner (HTML block 26086) - full width, responsive
+   --------------------------------------------------------------------------
+   Behavior:  Banner scrolls away with the page (no reserved space left behind)
+   Height:    30px desktop / 28px mobile (--fs-banner-h), also applied to
+              WoodMart's own reserved height (--wd-hb-opt-h) so they always match
+   Sticky:    WoodMart sticky header sits at the very top after scrolling
+   HTML:      block 26086 uses the CSS-animation marquee (no <marquee> tag)
+   Updated:   2026-10-17
+   ========================================================================== */
+:root {
+  --fs-banner-h: 30px;
+  --fs-admin-h: 0px;
+  --wd-hb-opt-h: var(--fs-banner-h) !important;   /* WoodMart reserves this height: keep it equal to the banner */
+}
+@media (max-width: 767px) { :root { --fs-banner-h: 28px; } }
+
+.admin-bar { --fs-admin-h: 32px; }
+@media (max-width: 782px) { .admin-bar { --fs-admin-h: 46px; } }
+
+.header-banner {
+  height: var(--fs-banner-h);
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  overflow: hidden;
+}
+
+/* Remove inner container limits so the gradient reaches both edges */
+.header-banner .container,
+.header-banner .elementor-section,
+.header-banner .elementor-container,
+.header-banner .elementor-widget-wrap,
+.header-banner .elementor-element {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Fit the marquee text to the banner height */
+.header-banner .fs-top-marquee {
+  padding: 0 !important;
+  line-height: var(--fs-banner-h) !important;
+}
+
+/* Sticky header sits at the very top (under the WP admin bar when logged in).
+   The banner scrolls away, so the header must NOT be pushed down by its height. */
+.whb-sticked .whb-main-header {
+  top: var(--fs-admin-h) !important;
+}
+
+
+
+                             /* ======================================*/
+
+/* =========================================================
+   FS CUSTOM PRINTS - DESKTOP HEADER (SLIM + ONE-LINE MENU)
+   Paste in: Appearance > Customize > Additional CSS
+   ========================================================= */
+
+@media (min-width: 1025px) {
+
+    /* ---------- 1. HEADER HEIGHT ----------
+       Change 60px to make the bar taller or shorter */
+    .whb-main-header .whb-row {
+        --wd-row-height: 60px !important;
+        min-height: 60px !important;
+    }
+
+    /* Remove extra space above/below the header content */
+    .whb-main-header .whb-row .whb-column {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    /* ---------- 2. LOGO SIZE ----------
+       The logo controls the height, so keep it small.
+       Raise 52px to 60px if the logo is hard to read */
+    .whb-main-header .site-logo img {
+        max-height: 52px !important;
+        width: auto !important;
+    }
+
+    /* Smaller logo when the header sticks while scrolling */
+    .whb-sticked .whb-main-header .site-logo img {
+        max-height: 44px !important;
+    }
+
+    /* ---------- 3. MENU ON ONE LINE ---------- */
+    .wd-nav-main {
+        flex-wrap: nowrap !important;
+        justify-content: center !important;
+        gap: 0 !important;
+    }
+
+    /* Don't let menu items wrap or shrink */
+    .wd-nav-main > li {
+        flex-shrink: 0 !important;
+    }
+
+    /* ---------- 4. MENU TEXT + SPACING ---------- */
+    .wd-nav-main > li > a {
+        white-space: nowrap !important;
+        font-size: 13px !important;
+        font-weight: 500 !important;
+        padding-left: 9px !important;
+        padding-right: 9px !important;
+    }
+}
+
+
+
+
+
+/* ==========================================================
+   SINGLE PRODUCT PAGE: GALLERY + COLUMN ALIGNMENT (ALL DEVICES)
+   ========================================================== */
+
+/* ---------- All screens: gallery ---------- */
+.single-product .wd-single-gallery{border-radius:12px;overflow:hidden;}
+.single-product .wd-single-gallery .wd-carousel-item img,
+.single-product .wd-single-gallery .woocommerce-product-gallery__image img{
+  width:100%; height:auto; object-fit:cover;
+  aspect-ratio:5 / 4;              /* keeps the image the taller column */
+}
+
+/* ---------- Desktop + laptop (1025px and up): side by side ---------- */
+@media (min-width:1025px){
+  .elementor-element-d81746d{align-items:stretch !important;}
+  .elementor-element-901030e{
+    align-self:stretch !important;
+    display:flex !important;
+    flex-direction:column !important;
+    position:static !important;     /* sticky off so it can stretch */
+  }
+  /* steps + WhatsApp button sit at the bottom, level with the image */
+  .elementor-element-56f8923{margin-top:auto !important;}
+}
+
+/* ---------- Tablet (768px to 1024px): stacked ---------- */
+@media (max-width:1024px){
+  .elementor-element-901030e{
+    position:static !important;
+    padding-left:0 !important;
+  }
+  .elementor-element-56f8923{margin-top:0 !important;}
+  .single-product .wd-single-gallery .wd-carousel-item img,
+  .single-product .wd-single-gallery .woocommerce-product-gallery__image img{
+    aspect-ratio:4 / 3;
+  }
+}
+
+/* ---------- Mobile (767px and below): stacked ---------- */
+@media (max-width:767px){
+  .single-product .wd-single-gallery .wd-carousel-item img,
+  .single-product .wd-single-gallery .woocommerce-product-gallery__image img{
+    aspect-ratio:1 / 1;
+  }
+  .fs-info{grid-template-columns:1fr !important;}  /* steps in one column */
+}
+
+
+
+
+/* ==========================================================
+   FS CUSTOM PRINTS - SHOP / CATEGORY PAGE STYLING
+   Paste in: Theme Settings > Custom CSS
+   ========================================================== */
+
+
+/* ---------- 1. PAGE TITLE BANNER (shorter) ---------- */
+.page-title{
+  padding-top:22px !important;
+  padding-bottom:22px !important;
+}
+
+
+/* ---------- 2. PRODUCT CARD (box, border, hover lift) ---------- */
+.wd-product .product-wrapper{
+  border:1px solid #eee;
+  border-radius:12px;
+  overflow:hidden;
+  background:#fff;
+  transition:transform .25s, box-shadow .25s;
+}
+.wd-product:hover .product-wrapper{
+  transform:translateY(-4px);
+  box-shadow:0 12px 28px rgba(0,0,0,.10);
+}
+
+
+/* ---------- 3. PRODUCT IMAGE (equal square size) ---------- */
+.wd-product .wd-product-thumb img{
+  aspect-ratio:1/1;
+  object-fit:cover;
+  width:100%;
+}
+
+
+/* ---------- 4. CARD TEXT AREA + TITLE ---------- */
+.wd-product .product-element-bottom{
+  padding:16px 12px 18px;
+  text-align:center;
+}
+.wd-product .wd-entities-title{
+  font-size:17px;
+  font-weight:600;
+  margin-bottom:6px;
+}
+
+
+/* ---------- 5. HIDE REPEATED CATEGORY LINE ---------- */
+/* Remove this block to show "Uniforms & Custom Apparel, ..." again
+.wd-product .wd-product-cats{
+  display:none;
+} */
+
+/* ---------- 5. CATEGORY LINE (smaller, tidy) ---------- */
+.wd-product .wd-product-cats{
+  font-size:12px;
+  color:#888;
+  margin-bottom:10px;
+}
+
+
+
+
+
+/* ---------- 6. GET A QUOTE BUTTON (PRODUCT CARDS) ---------- */
+/* Needs the PHP snippet that outputs .fs-quote-btn (CSS only, no JS)
+   HOW IT WORKS
+     Default: gradient button with "Get a Quote" (the link's own text)
+     Hover:   turns into a light pill: "Chat on WhatsApp" + green send circle
+   Gradient:  135deg default, covered by the pill on hover (270deg underneath)
+   To change the hover text: edit content:"..." in .fs-quote-btn::before below */
+.fs-quote-wrap{
+  text-align:center;
+  margin-top:12px;
+}
+.fs-quote-btn{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  max-width:200px;
+  min-height:50px;
+  margin:0 auto;
+  padding:6px 12px !important;
+  overflow:hidden;
+  white-space:normal;
+  text-align:center;
+  font-size:12.5px;
+  font-weight:600;
+  line-height:15px;
+  border-radius:999px;
+  border-color:transparent !important;
+  color:#FFFFFF !important;
+  background-color:#A8112F !important;
+  background-image:linear-gradient(135deg, #A8112F 0%, #1A0508 100%) !important;
+  transition:box-shadow .3s ease, color .2s ease;
+}
+.fs-quote-btn:hover{
+  color:transparent !important;           /* hide the button text under the pill */
+  box-shadow:0 6px 16px rgba(168, 17, 47, 0.35);
+}
+
+/* Hover pill with the text */
+.fs-quote-btn::before{
+  content:"Chat on WhatsApp";
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  padding:0 46px 0 18px;
+  background:#f6f2ec;
+  color:#333;
+  font-size:13px;
+  font-weight:600;
+  text-align:left;
+  opacity:0;
+  transition:opacity .35s ease .05s;
+}
+.fs-quote-btn:hover::before{ opacity:1; }
+
+/* Green send circle */
+.fs-quote-btn::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  right:5px;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:#25D366 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fff'%3E%3Cpath d='M2.01 21 23 12 2.01 3 2 10l15 2-15 2z'/%3E%3C/svg%3E") 55% center / 17px no-repeat;
+  opacity:0;
+  transform:translateY(-50%) scale(.4);
+  transition:opacity .3s ease .1s, transform .45s cubic-bezier(.22,1,.36,1) .1s;
+}
+.fs-quote-btn:hover::after{
+  opacity:1;
+  transform:translateY(-50%) scale(1);
+}
+   
+
+
+
+/* ==========================================================================
+   FS CUSTOM PRINTS – GLOBAL BUTTON STYLE (ALL BUTTONS)
+   --------------------------------------------------------------------------
+   Theme:        WoodMart (Elementor + WooCommerce)
+   Purpose:      Crimson-to-black gradient on every button, site-wide
+   Default:      linear-gradient(135deg, #A8112F 0%, #1A0508 100%)
+   Hover:        linear-gradient(270deg, #A8112F 0%, #1A0508 100%)
+                 (only the angle changes: 135deg -> 270deg)
+   Colors:       Start (crimson): #A8112F  rgb(168, 17, 47)
+                 End   (black):   #1A0508  rgb(26, 5, 8)
+   Text / icons: White
+   Sections:     1. General buttons – default state
+                 2. General buttons – hover state
+                 3. Icons
+                 4. Cookie popup "Accept" button
+   Updated:      2026-10-14
+   Notes:        !important overrides WoodMart / Elementor / Woo styles.
+                 If a button is missed, add its class to BOTH the default
+                 and hover lists of its section.
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   1. GENERAL BUTTONS – DEFAULT STATE (135deg)
+   -------------------------------------------------------------------------- */
+.btn,
+.button,
+button.button,
+input[type="submit"],
+.elementor-button,
+.wd-button-wrapper .btn,
+.woocommerce a.button,
+.woocommerce button.button,
+.woocommerce input.button,
+.single_add_to_cart_button,
+.checkout-button,
+.wd-buttons .btn,
+.wd-load-more {
+  background-color: #A8112F !important;
+  background-image: linear-gradient(135deg, #A8112F 0%, #1A0508 100%) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   2. GENERAL BUTTONS – HOVER STATE (angle changes to 270deg)
+   -------------------------------------------------------------------------- */
+.btn:hover,
+.button:hover,
+button.button:hover,
+input[type="submit"]:hover,
+.elementor-button:hover,
+.wd-button-wrapper .btn:hover,
+.woocommerce a.button:hover,
+.woocommerce button.button:hover,
+.woocommerce input.button:hover,
+.single_add_to_cart_button:hover,
+.checkout-button:hover,
+.wd-buttons .btn:hover,
+.wd-load-more:hover {
+  background-image: linear-gradient(270deg, #A8112F 0%, #1A0508 100%) !important;
+  color: #fff !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   3. ICONS (keep white)
+   -------------------------------------------------------------------------- */
+.btn i,
+.btn .wd-icon,
+.elementor-button i {
+  color: #fff !important;
+}
+
+
+/* ==========================================================================
+   4. COOKIE POPUP – "ACCEPT" BUTTON
+   --------------------------------------------------------------------------
+   Location:     Bottom bar: "We use cookies to improve your experience..."
+   Style:        Same gradient as all other buttons (135deg -> 270deg hover)
+   Reason:       WoodMart styles this button with its own classes, so the
+                 general button rules above do not reach it
+   Note:         If it is still yellow, inspect the button and add its
+                 class to both lists below
+   ========================================================================== */
+
+/* 4a. Default state (135deg) */
+.wd-cookies-popup .cookies-accept-btn,
+.wd-cookies-popup .wd-cookies-buttons .btn,
+.wd-cookies-popup .wd-cookies-buttons a,
+.wd-cookies-popup a.btn,
+.wd-cookies-popup .wd-cookies-inner .btn {
+  background-color: #A8112F !important;
+  background-image: linear-gradient(135deg, #A8112F 0%, #1A0508 100%) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+}
+
+/* 4b. Hover state (270deg) */
+.wd-cookies-popup .cookies-accept-btn:hover,
+.wd-cookies-popup .wd-cookies-buttons .btn:hover,
+.wd-cookies-popup .wd-cookies-buttons a:hover,
+.wd-cookies-popup a.btn:hover,
+.wd-cookies-popup .wd-cookies-inner .btn:hover {
+  background-image: linear-gradient(270deg, #A8112F 0%, #1A0508 100%) !important;
+  color: #fff !important;
+}
+
+/* 4c. Cookie button icon (keep white) */
+.wd-cookies-popup .btn i {
+  color: #fff !important;
+}
+
+/* ============================ END BUTTON STYLE ============================ */
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   FS CUSTOM PRINTS – "GET A QUOTE" BAR THAT SHOWS "QUERY ABOUT {PRODUCT}"
+   --------------------------------------------------------------------------
+   Default: crimson-to-black gradient button (WhatsApp icon + "Get a Quote")
+   Hover:   button turns into a message bar: tag icon (decorative)
+            + "Query about {Product}" (read-only) + green send button
+   Colors:  Wine #A8112F, black #1A0508, WhatsApp green #25D366
+   Needs:   HTML form (class fs-quote) + small script, placed in an Elementor
+            HTML widget on the product page. Product name is read from
+            .product_title, or data-product="Name" on the form.
+   Updated: 2026-10-15
+   ========================================================================== */
+
+:root {
+  --fs-wine:  #A8112F;
+  --fs-black: #1A0508;
+  --fs-wa:    #25D366;
+  --fs-ease:  cubic-bezier(.22, 1, .36, 1);
+}
+
+
+/* --------------------------------------------------------------------------
+   1. BUTTON (default state)
+   -------------------------------------------------------------------------- */
+.fs-quote {
+  position: relative;
+  width: 260px;
+  height: 64px;
+  border-radius: 14px;
+  overflow: hidden;
+  color: #fff;
+  background-color: var(--fs-wine);
+  background-image: linear-gradient(135deg, #A8112F 0%, #1A0508 100%);
+  box-shadow: 0 6px 16px rgba(168, 17, 47, .25);
+  transition: width .55s var(--fs-ease), border-radius .55s var(--fs-ease), box-shadow .4s ease;
+}
+
+/* Light layer that fades in on hover */
+.fs-quote::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #f6f2ec;
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+
+
+/* --------------------------------------------------------------------------
+   2. HOVER / FOCUS (button turns into the message bar)
+   -------------------------------------------------------------------------- */
+.fs-quote:hover,
+.fs-quote:focus-within {
+  width: min(460px, calc(100vw - 32px));
+  border-radius: 999px;
+  box-shadow: 0 10px 26px rgba(168, 17, 47, .28);
+}
+.fs-quote:hover::before,
+.fs-quote:focus-within::before {
+  opacity: 1;
+}
+
+
+/* --------------------------------------------------------------------------
+   3. BUTTON FACE ("Get a Quote" text + WhatsApp icon)
+   -------------------------------------------------------------------------- */
+.fs-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font: 700 19px Arial, sans-serif;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity .25s ease, transform .45s var(--fs-ease);
+}
+.fs-quote:hover .fs-face,
+.fs-quote:focus-within .fs-face {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+.fs-ico { width: 1.25em; height: 1.25em; fill: #fff; }
+
+
+/* --------------------------------------------------------------------------
+   4. MESSAGE BAR (tag icon + product text + send button)
+   -------------------------------------------------------------------------- */
+.fs-bar {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 9px 0 22px;
+  opacity: 0;
+  transform: translateX(20px);
+  pointer-events: none;
+  transition: opacity .2s ease, transform .45s var(--fs-ease);
+}
+.fs-quote:hover .fs-bar,
+.fs-quote:focus-within .fs-bar {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  transition: opacity .35s ease .15s, transform .5s var(--fs-ease) .1s;
+}
+
+/* Decorative tag icon (not clickable) */
+.fs-tag { width: 22px; height: 22px; fill: var(--fs-wine); flex: none; }
+
+/* "Query about {product}" – read-only, placeholder look */
+.fs-bar input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  outline: none;
+  font-size: 17px;
+  color: #333;
+  text-overflow: ellipsis;
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+
+/* --------------------------------------------------------------------------
+   5. SEND BUTTON (WhatsApp green)
+   -------------------------------------------------------------------------- */
+.fs-send {
+  width: 48px;
+  height: 48px;
+  flex: none;
+  border: 0;
+  border-radius: 50%;
+  background: var(--fs-wa);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform .25s var(--fs-ease), filter .2s;
+}
+.fs-send:hover  { transform: scale(1.08); filter: brightness(1.06); }
+.fs-send:active { transform: scale(.94); }
+.fs-send:focus-visible { outline: 3px solid #E3B04B; outline-offset: 2px; }
+.fs-send svg { width: 22px; height: 22px; fill: #fff; margin-left: 2px; }
+
+
+/* --------------------------------------------------------------------------
+   6. ACCESSIBILITY
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .fs-quote, .fs-quote * { transition-duration: .01s !important; }
+}
+
+/* ============================ END QUOTE BAR STYLE ========================= */
+
+
+
+
+
+
+
+/* ==========================================================================
+   BLOCK 1 – SLIDER / ELEMENTOR BUTTON -> "CHAT ON WHATSAPP" BAR
+   --------------------------------------------------------------------------
+   Applies to:  1) every button inside the home slider (all slides)
+                2) any button whose link contains "whatsapp" or "wa.me"
+                3) any button inside a widget with the class fs-chat-btn
+   Default:     gradient button – unchanged
+   Hover:       widens into a light pill: text + green send circle
+   Updated:     2026-10-17
+   ========================================================================== */
+
+/* Default: fixed width so it can animate */
+:is(.wd-slider .btn, .wd-slide .btn, .fs-chat-btn .btn, .fs-chat-btn .elementor-button, a.btn[href*="wa.me" i], a.btn[href*="whatsapp" i]) {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 270px !important;
+  max-width: 100% !important;
+  height: 58px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  border-radius: 999px !important;
+  transition: width .5s cubic-bezier(.22,1,.36,1), box-shadow .3s ease !important;
+}
+
+/* Icon + text inside fade out on hover */
+:is(.wd-slider .btn, .wd-slide .btn, .fs-chat-btn .btn, .fs-chat-btn .elementor-button, a.btn[href*="wa.me" i], a.btn[href*="whatsapp" i]) > * {
+  transition: opacity .2s ease !important;
+}
+:is(.wd-slider .btn, .wd-slide .btn, .fs-chat-btn .btn, .fs-chat-btn .elementor-button, a.btn[href*="wa.me" i], a.btn[href*="whatsapp" i]):hover > * {
+  opacity: 0 !important;
+}
+
+/* Hover: widen */
+:is(.wd-slider .btn, .wd-slide .btn, .fs-chat-btn .btn, .fs-chat-btn .elementor-button, a.btn[href*="wa.me" i], a.btn[href*="whatsapp" i]):hover {
+  width: 350px !important;
+  box-shadow: 0 8px 20px rgba(168, 17, 47, .35) !important;
+}
+
+/* Light pill with the message text */
+:is(.wd-slider .btn, .wd-slide .btn, .fs-chat-btn .btn, .fs-chat-btn .elementor-button, a.btn[href*="wa.me" i], a.btn[href*="whatsapp" i])::before {
+  content: "Chat on WhatsApp";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 70px 0 26px;
+  background: #f6f2ec;
+  color: #333;
+  font-size: 17px;
+  font-weight: 500;
+  text-align: left;
+  opacity: 0;
+  transition: opacity .35s ease .1s;
+  z-index: 1;
+}
+:is(.wd-slider .btn, .wd-slide .btn, .fs-chat-btn .btn, .fs-chat-btn .elementor-button, a.btn[href*="wa.me" i], a.btn[href*="whatsapp" i]):hover::before {
+  opacity: 1;
+}
+
+/* Green send circle */
+:is(.wd-slider .btn, .wd-slide .btn, .fs-chat-btn .btn, .fs-chat-btn .elementor-button, a.btn[href*="wa.me" i], a.btn[href*="whatsapp" i])::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #25D366 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fff'%3E%3Cpath d='M2.01 21 23 12 2.01 3 2 10l15 2-15 2z'/%3E%3C/svg%3E") 55% center / 22px no-repeat;
+  opacity: 0;
+  transform: scale(.4);
+  transition: opacity .3s ease .15s, transform .45s cubic-bezier(.22,1,.36,1) .1s;
+  z-index: 2;
+}
+:is(.wd-slider .btn, .wd-slide .btn, .fs-chat-btn .btn, .fs-chat-btn .elementor-button, a.btn[href*="wa.me" i], a.btn[href*="whatsapp" i]):hover::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Mobile: slightly smaller */
+@media (max-width: 767px) {
+  :is(.wd-slider .btn, .wd-slide .btn, .fs-chat-btn .btn, .fs-chat-btn .elementor-button, a.btn[href*="wa.me" i], a.btn[href*="whatsapp" i]) { width: 230px !important; height: 52px !important; }
+  :is(.wd-slider .btn, .wd-slide .btn, .fs-chat-btn .btn, .fs-chat-btn .elementor-button, a.btn[href*="wa.me" i], a.btn[href*="whatsapp" i]):hover { width: 290px !important; }
+  :is(.wd-slider .btn, .wd-slide .btn, .fs-chat-btn .btn, .fs-chat-btn .elementor-button, a.btn[href*="wa.me" i], a.btn[href*="whatsapp" i])::after { width: 42px; height: 42px; }
+}
+
+
+
+/* ==========================================================================
+   BLOCK 1b – WHATSAPP ICON ON THE LEFT OF EVERY wa.me SLIDER BUTTON
+   --------------------------------------------------------------------------
+   Applies to:  every slider button, and any button, whose link contains wa.me
+   Icon:        standard WhatsApp glyph (bubble + handset), white, left of text
+   Slide 1:     its own Elementor icon is hidden so all slides look the same
+   Hover:       icon fades out with the text when the button turns into the
+                "Chat on WhatsApp" bar (Block 1)
+   Updated:     2026-10-17
+   ========================================================================== */
+
+/* Hide any icon already set in Elementor on wa.me buttons (avoids two icons) */
+a.btn[href*="wa.me" i] .wd-btn-icon {
+  display: none !important;
+}
+
+/* Text + icon sit side by side */
+a.btn[href*="wa.me" i] .wd-btn-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+
+/* The icon */
+a.btn[href*="wa.me" i] .wd-btn-text::before {
+  content: "";
+  flex: none;
+  width: 22px;
+  height: 22px;
+  background: currentColor;      /* stays white, follows the text color */
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.3-.15-1.263-.465-2.403-1.485-.888-.795-1.484-1.77-1.66-2.07-.174-.3-.019-.465.13-.615.136-.135.301-.345.451-.523.146-.181.194-.301.297-.496.1-.21.049-.375-.025-.524-.075-.15-.672-1.62-.922-2.206-.24-.584-.487-.51-.672-.51-.172-.015-.371-.015-.571-.015-.2 0-.523.074-.797.359-.273.3-1.045 1.02-1.045 2.475s1.07 2.865 1.219 3.075c.149.18 2.095 3.195 5.076 4.483.714.306 1.27.489 1.704.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.696.248-1.289.173-1.414-.074-.126-.272-.2-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.3-.15-1.263-.465-2.403-1.485-.888-.795-1.484-1.77-1.66-2.07-.174-.3-.019-.465.13-.615.136-.135.301-.345.451-.523.146-.181.194-.301.297-.496.1-.21.049-.375-.025-.524-.075-.15-.672-1.62-.922-2.206-.24-.584-.487-.51-.672-.51-.172-.015-.371-.015-.571-.015-.2 0-.523.074-.797.359-.273.3-1.045 1.02-1.045 2.475s1.07 2.865 1.219 3.075c.149.18 2.095 3.195 5.076 4.483.714.306 1.27.489 1.704.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.696.248-1.289.173-1.414-.074-.126-.272-.2-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+
+
+
+
+
+/* ==========================================================================
+   BLOCK 2 – HOVER TEXT PER SLIDE
+   --------------------------------------------------------------------------
+   CSS only, no JavaScript.
+   Each slider button shows its own text in the chat pill (Block 1), picked
+   by a word in its WhatsApp link: uniforms / printing / embroidery /
+   giveaways / branding. Change a slide's link and keep that word, or its
+   text falls back to "Chat on WhatsApp".
+   Updated:  2026-10-17
+   ========================================================================== */
+.wd-slide a.btn[href*="uniforms" i]::before   { content: "Uniform quote on WhatsApp"; }
+.wd-slide a.btn[href*="printing" i]::before   { content: "Send your T-shirt design"; }
+.wd-slide a.btn[href*="embroidery" i]::before { content: "Share your logo with us"; }
+.wd-slide a.btn[href*="giveaways" i]::before  { content: "Get bulk gift pricing"; }
+.wd-slide a.btn[href*="branding" i]::before   { content: "Tell us about your brand"; }
