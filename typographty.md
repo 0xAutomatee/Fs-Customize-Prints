@@ -1,3 +1,13 @@
+
+
+
+<img width="817" height="393" alt="image" src="https://github.com/user-attachments/assets/a9754e54-6636-4189-a7a5-f8b97a843bb3" />
+
+
+
+
+
+
 Woodmart field	Font	Weight	Size	Color	Hover color
 Text font	Outfit	Normal 400	16 (keep)	#5a464b	n/a
 Title font (h1 to h6)	Lexend Deca	Semi-Bold 600	leave your sizes	#4A0C1C	n/a
